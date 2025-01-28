@@ -19,13 +19,33 @@
 
 * kubectl create deployment name-of-deployment --image=caddy --replicas=3
 
-* kubectl get deployment/deployment-name -o jsonpath='{.spec.template.spec.containers[*].Name}'
+* kubectl get deployment/deployment-name -o jsonpath='{.spec.template.spec.containers[*].name}'
 
 * kubectl set image deployment/deployment-name containername=new-iamge:version
 
 * kubectl rollout history/status/undo deployment/deployment-name
 
-* kubectl create namespace namesapace-name
+* kubectl create namespace namespace nema* # Set environment variables
+* 
+     export ENV="dev"            # or "prod", "staging", etc.
+  
+     export PROJECT_NAME="myproject"
+  
+     export NAMESPACE="${PROJECT_NAME}-${ENV}"  # This will set the namespace to "myproject-dev"
+
+* kubectl create namespace ${NAMESPACE}
+
+* kubectl get namespaces
+
+* kubectl set env deployment/<deployment-name> VAR_NAME=${ENV} -n ${NAMESPACE}
+
+* kubectl config set-context ${NAMESPACE}-context --namespace=${NAMESPACE}
+  
+* kubectl config use-context ${NAMESPACE}-context
+
+ * kubectl port-forward service/<service-name> <local-port>:<service-port> -n ${NAMESPACE}
+
+
 
 * kubectl config set-context --current --namespace=name-of-namespace
 
